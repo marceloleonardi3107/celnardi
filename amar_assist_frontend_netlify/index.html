@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Treinamento - Amar Assist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo-amar-assist.png" alt="Amar Assist" height="40" class="me-2">
+                Sistema de Treinamento
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#modules">Módulos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#progress">Progresso</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i> Usuário
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#profile">Perfil</a></li>
+                            <li><a class="dropdown-item" href="#settings">Configurações</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#logout">Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#dashboard" onclick="showSection('dashboard')">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#modules" onclick="showSection('modules')">
+                                <i class="fas fa-book"></i> Módulos de Treinamento
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#progress" onclick="showSection('progress')">
+                                <i class="fas fa-chart-line"></i> Meu Progresso
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#certificates" onclick="showSection('certificates')">
+                                <i class="fas fa-certificate"></i> Certificados
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#upload" onclick="showSection('upload')">
+                                <i class="fas fa-upload"></i> Upload de Arquivos
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content Area -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="content-section">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Dashboard - Sistema de Treinamento Amar Assist</h1>
+                    </div>
+
+                    <!-- Welcome Card -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body">
+                                    <h4 class="card-title">Bem-vindo ao Sistema de Treinamento!</h4>
+                                    <p class="card-text">Desenvolva suas habilidades de vendas com o programa de capacitação da maior insurtech brasileira de pós-saúde.</p>
+                                    <p class="card-text"><small>Mais de 125 mil clientes protegidos | Avaliação 4.7/5 no Reclame Aqui</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card text-white bg-success">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h4 id="completed-modules">0</h4>
+                                            <p>Módulos Concluídos</p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-check-circle fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-white bg-info">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h4 id="total-progress">0%</h4>
+                                            <p>Progresso Geral</p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-chart-pie fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-white bg-warning">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h4 id="quiz-score">0%</h4>
+                                            <p>Média nos Quizzes</p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-trophy fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-white bg-secondary">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h4 id="study-time">0h</h4>
+                                            <p>Tempo de Estudo</p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-clock fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current Module Focus -->
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-star text-warning"></i> Módulo em Destaque: Portfólio de Produtos e Serviços</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p>Aprenda sobre os produtos da Amar Assist: planos funerários familiares, jazigos garantidos e seguros complementares.</p>
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar" role="progressbar" style="width: 0%" id="current-module-progress">0%</div>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="showSection('modules')">Continuar Estudos</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-bullhorn"></i> Próximos Passos</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-play-circle text-primary"></i> Assistir vídeos explicativos</li>
+                                        <li><i class="fas fa-file-pdf text-danger"></i> Baixar materiais de apoio</li>
+                                        <li><i class="fas fa-question-circle text-info"></i> Realizar quizzes de avaliação</li>
+                                        <li><i class="fas fa-certificate text-success"></i> Obter certificação</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modules Section -->
+                <div id="modules" class="content-section" style="display: none;">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Módulos de Treinamento</h1>
+                    </div>
+
+                    <div id="modules-container">
+                        <!-- Modules will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Lesson Detail Section -->
+                <div id="lesson-detail" class="content-section" style="display: none;">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2" id="lesson-title">Carregando...</h1>
+                        <button class="btn btn-outline-secondary" onclick="showSection('modules')">
+                            <i class="fas fa-arrow-left"></i> Voltar aos Módulos
+                        </button>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div id="lesson-content">
+                                        <!-- Lesson content will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-paperclip"></i> Materiais de Apoio</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="lesson-media">
+                                        <!-- Media placeholders will be shown here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-question-circle"></i> Quiz da Lição</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p>Teste seus conhecimentos sobre esta lição.</p>
+                                    <button class="btn btn-success" id="start-quiz-btn" onclick="startQuiz()">
+                                        <i class="fas fa-play"></i> Iniciar Quiz
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Section -->
+                <div id="quiz-section" class="content-section" style="display: none;">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2" id="quiz-title">Quiz</h1>
+                        <div>
+                            <span class="badge bg-info" id="quiz-timer">Tempo: --:--</span>
+                            <button class="btn btn-outline-secondary ms-2" onclick="showLessonDetail()">
+                                <i class="fas fa-arrow-left"></i> Voltar à Lição
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div id="quiz-content">
+                                        <!-- Quiz questions will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-info-circle"></i> Informações do Quiz</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Pontuação mínima:</strong> <span id="quiz-passing-score">--</span>%</p>
+                                    <p><strong>Tentativas restantes:</strong> <span id="quiz-attempts-left">--</span></p>
+                                    <p><strong>Tempo limite:</strong> <span id="quiz-time-limit">--</span> minutos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Section -->
+                <div id="progress" class="content-section" style="display: none;">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Meu Progresso</h1>
+                    </div>
+
+                    <div id="progress-container">
+                        <!-- Progress charts and data will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Upload Section -->
+                <div id="upload" class="content-section" style="display: none;">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Upload de Arquivos</h1>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>Enviar Materiais de Treinamento</h5>
+                            <p>Faça upload de vídeos, áudios, imagens e documentos para enriquecer o conteúdo das lições.</p>
+                            
+                            <div class="mb-3">
+                                <label for="lesson-select" class="form-label">Selecionar Lição:</label>
+                                <select class="form-select" id="lesson-select">
+                                    <option value="">Selecione uma lição...</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="file-input" class="form-label">Escolher Arquivos:</label>
+                                <input class="form-control" type="file" id="file-input" multiple accept="video/*,audio/*,image/*,.pdf,.doc,.docx">
+                                <div class="form-text">Tipos aceitos: vídeos, áudios, imagens, PDFs e documentos</div>
+                            </div>
+
+                            <button class="btn btn-primary" onclick="uploadFiles()">
+                                <i class="fas fa-upload"></i> Fazer Upload
+                            </button>
+
+                            <div id="upload-progress" class="mt-3" style="display: none;">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 0%">0%</div>
+                                </div>
+                            </div>
+
+                            <div id="upload-results" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                    <p class="mt-2">Carregando...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+

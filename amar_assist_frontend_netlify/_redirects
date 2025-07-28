@@ -1,0 +1,6 @@
+# Redirecionamentos para API
+/api/* https://api-amar-assist.herokuapp.com/api/:splat 200
+
+# Fallback para SPA
+/* /index.html 200
+
